@@ -1,0 +1,840 @@
+{
+  "equipos": [
+    {
+      "id": "BOC",
+      "nombre": "Boca Juniors",
+      "escudoUrl": "./assets/shields/BOC.png",
+      "presupuesto": 45000000,
+      "estadio": "La Bombonera",
+      "ciudad": "Buenos Aires",
+      "pais": "Argentina",
+      "reputacion": 85,
+      "fundacion": 1905,
+      "plantilla": [
+        {
+          "id": "p_rossi",
+          "nombre": "Sergio Rossi",
+          "fotoUrl": "./assets/faces/p_rossi.png",
+          "numero": 1,
+          "edad": 28,
+          "nacionalidad": "Argentina",
+          "posicion": "POR",
+          "atributos": {
+            "velocidad": 65,
+            "remate": 25,
+            "pase": 60,
+            "defensa": 88,
+            "fisico": 82,
+            "portero": 92
+          },
+          "contrato": {
+            "sueldoMensual": 45000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 8000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 5000
+          },
+          "moral": 85,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_martinez",
+          "nombre": "Carlos Martínez",
+          "fotoUrl": "./assets/faces/p_martinez.png",
+          "numero": 4,
+          "edad": 26,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 75,
+            "remate": 35,
+            "pase": 70,
+            "defensa": 88,
+            "fisico": 85,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 38000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 12000000,
+            "fechaFirma": 2022,
+            "bonificacionesAdicionales": 3000
+          },
+          "moral": 80,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_fernandez",
+          "nombre": "Juan Fernández",
+          "fotoUrl": "./assets/faces/p_fernandez.png",
+          "numero": 3,
+          "edad": 24,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 78,
+            "remate": 32,
+            "pase": 68,
+            "defensa": 85,
+            "fisico": 83,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 32000,
+            "anoVencimiento": 2026,
+            "clausulaRescision": 10000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 82,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_lopez",
+          "nombre": "Roberto López",
+          "fotoUrl": "./assets/faces/p_lopez.png",
+          "numero": 2,
+          "edad": 29,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 72,
+            "remate": 30,
+            "pase": 65,
+            "defensa": 86,
+            "fisico": 84,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 35000,
+            "anoVencimiento": 2025,
+            "clausulaRescision": 9000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2500
+          },
+          "moral": 78,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_torres",
+          "nombre": "Diego Torres",
+          "fotoUrl": "./assets/faces/p_torres.png",
+          "numero": 6,
+          "edad": 27,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 76,
+            "remate": 68,
+            "pase": 82,
+            "defensa": 75,
+            "fisico": 80,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 42000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 15000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 4000
+          },
+          "moral": 88,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_sanchez",
+          "nombre": "Miguel Sánchez",
+          "fotoUrl": "./assets/faces/p_sanchez.png",
+          "numero": 5,
+          "edad": 25,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 80,
+            "remate": 72,
+            "pase": 78,
+            "defensa": 68,
+            "fisico": 79,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 38000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 14000000,
+            "fechaFirma": 2022,
+            "bonificacionesAdicionales": 3500
+          },
+          "moral": 85,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_garcia",
+          "nombre": "Pablo García",
+          "fotoUrl": "./assets/faces/p_garcia.png",
+          "numero": 8,
+          "edad": 28,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 74,
+            "remate": 75,
+            "pase": 80,
+            "defensa": 70,
+            "fisico": 78,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 48000,
+            "anoVencimiento": 2026,
+            "clausulaRescision": 18000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 5000
+          },
+          "moral": 86,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_moreno",
+          "nombre": "Andrés Moreno",
+          "fotoUrl": "./assets/faces/p_moreno.png",
+          "numero": 7,
+          "edad": 23,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 82,
+            "remate": 70,
+            "pase": 76,
+            "defensa": 65,
+            "fisico": 77,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 32000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 12000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 87,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_ramirez",
+          "nombre": "Cristian Ramírez",
+          "fotoUrl": "./assets/faces/p_ramirez.png",
+          "numero": 11,
+          "edad": 26,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 88,
+            "remate": 85,
+            "pase": 72,
+            "defensa": 45,
+            "fisico": 80,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 55000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 22000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 8000
+          },
+          "moral": 90,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_perez",
+          "nombre": "Javier Pérez",
+          "fotoUrl": "./assets/faces/p_perez.png",
+          "numero": 9,
+          "edad": 29,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 82,
+            "remate": 88,
+            "pase": 70,
+            "defensa": 42,
+            "fisico": 81,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 62000,
+            "anoVencimiento": 2025,
+            "clausulaRescision": 25000000,
+            "fechaFirma": 2022,
+            "bonificacionesAdicionales": 10000
+          },
+          "moral": 88,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_silva",
+          "nombre": "Mateo Silva",
+          "fotoUrl": "./assets/faces/p_silva.png",
+          "numero": 10,
+          "edad": 24,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 86,
+            "remate": 82,
+            "pase": 75,
+            "defensa": 48,
+            "fisico": 78,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 48000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 20000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 6000
+          },
+          "moral": 89,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_gomez",
+          "nombre": "Francisco Gómez",
+          "fotoUrl": "./assets/faces/p_gomez.png",
+          "numero": 25,
+          "edad": 20,
+          "nacionalidad": "Argentina",
+          "posicion": "POR",
+          "atributos": {
+            "velocidad": 68,
+            "remate": 20,
+            "pase": 55,
+            "defensa": 82,
+            "fisico": 78,
+            "portero": 85
+          },
+          "contrato": {
+            "sueldoMensual": 18000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 3000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 0
+          },
+          "moral": 75,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_vega",
+          "nombre": "Lucas Vega",
+          "fotoUrl": "./assets/faces/p_vega.png",
+          "numero": 15,
+          "edad": 22,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 76,
+            "remate": 38,
+            "pase": 66,
+            "defensa": 80,
+            "fisico": 81,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 22000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 8000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 1000
+          },
+          "moral": 80,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_ruiz",
+          "nombre": "Alejandro Ruiz",
+          "fotoUrl": "./assets/faces/p_ruiz.png",
+          "numero": 14,
+          "edad": 21,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 78,
+            "remate": 68,
+            "pase": 74,
+            "defensa": 62,
+            "fisico": 75,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 20000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 7000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 1000
+          },
+          "moral": 82,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "p_herrera",
+          "nombre": "Nicolás Herrera",
+          "fotoUrl": "./assets/faces/p_herrera.png",
+          "numero": 20,
+          "edad": 23,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 84,
+            "remate": 78,
+            "pase": 68,
+            "defensa": 40,
+            "fisico": 76,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 28000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 11000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 84,
+          "energia": 100,
+          "lesionado": false
+        }
+      ]
+    },
+    {
+      "id": "RIV",
+      "nombre": "River Plate",
+      "escudoUrl": "./assets/shields/RIV.png",
+      "presupuesto": 52000000,
+      "estadio": "Monumental",
+      "ciudad": "Buenos Aires",
+      "pais": "Argentina",
+      "reputacion": 88,
+      "fundacion": 1901,
+      "plantilla": [
+        {
+          "id": "r_armani",
+          "nombre": "Franco Armani",
+          "fotoUrl": "./assets/faces/r_armani.png",
+          "numero": 1,
+          "edad": 36,
+          "nacionalidad": "Argentina",
+          "posicion": "POR",
+          "atributos": {
+            "velocidad": 60,
+            "remate": 20,
+            "pase": 65,
+            "defensa": 90,
+            "fisico": 80,
+            "portero": 95
+          },
+          "contrato": {
+            "sueldoMensual": 52000,
+            "anoVencimiento": 2025,
+            "clausulaRescision": 5000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 6000
+          },
+          "moral": 88,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_diaz",
+          "nombre": "Gonzalo Díaz",
+          "fotoUrl": "./assets/faces/r_diaz.png",
+          "numero": 4,
+          "edad": 27,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 76,
+            "remate": 36,
+            "pase": 71,
+            "defensa": 89,
+            "fisico": 86,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 40000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 13000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 3000
+          },
+          "moral": 86,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_rojas",
+          "nombre": "Enzo Rojas",
+          "fotoUrl": "./assets/faces/r_rojas.png",
+          "numero": 3,
+          "edad": 25,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 77,
+            "remate": 33,
+            "pase": 69,
+            "defensa": 86,
+            "fisico": 84,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 35000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 11000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 84,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_tapia",
+          "nombre": "Nicolás Tapia",
+          "fotoUrl": "./assets/faces/r_tapia.png",
+          "numero": 2,
+          "edad": 28,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 73,
+            "remate": 31,
+            "pase": 66,
+            "defensa": 87,
+            "fisico": 85,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 38000,
+            "anoVencimiento": 2026,
+            "clausulaRescision": 10000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2500
+          },
+          "moral": 82,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_ponzio",
+          "nombre": "Javier Ponzio",
+          "fotoUrl": "./assets/faces/r_ponzio.png",
+          "numero": 6,
+          "edad": 30,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 72,
+            "remate": 65,
+            "pase": 85,
+            "defensa": 78,
+            "fisico": 79,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 45000,
+            "anoVencimiento": 2025,
+            "clausulaRescision": 12000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 4000
+          },
+          "moral": 87,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_alvarez",
+          "nombre": "Julián Álvarez",
+          "fotoUrl": "./assets/faces/r_alvarez.png",
+          "numero": 5,
+          "edad": 24,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 81,
+            "remate": 74,
+            "pase": 79,
+            "defensa": 70,
+            "fisico": 80,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 40000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 16000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 3500
+          },
+          "moral": 86,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_fernandez",
+          "nombre": "Matías Fernández",
+          "fotoUrl": "./assets/faces/r_fernandez.png",
+          "numero": 8,
+          "edad": 27,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 75,
+            "remate": 76,
+            "pase": 81,
+            "defensa": 72,
+            "fisico": 79,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 50000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 19000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 5000
+          },
+          "moral": 88,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_gomez",
+          "nombre": "Agustín Gómez",
+          "fotoUrl": "./assets/faces/r_gomez.png",
+          "numero": 7,
+          "edad": 22,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 83,
+            "remate": 71,
+            "pase": 77,
+            "defensa": 66,
+            "fisico": 78,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 30000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 13000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 85,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_borja",
+          "nombre": "Sebastián Borja",
+          "fotoUrl": "./assets/faces/r_borja.png",
+          "numero": 11,
+          "edad": 28,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 86,
+            "remate": 87,
+            "pase": 71,
+            "defensa": 44,
+            "fisico": 82,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 58000,
+            "anoVencimiento": 2026,
+            "clausulaRescision": 24000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 8000
+          },
+          "moral": 91,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_torres",
+          "nombre": "Braian Torres",
+          "fotoUrl": "./assets/faces/r_torres.png",
+          "numero": 9,
+          "edad": 26,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 84,
+            "remate": 85,
+            "pase": 69,
+            "defensa": 43,
+            "fisico": 80,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 54000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 22000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 7000
+          },
+          "moral": 89,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_sosa",
+          "nombre": "Ezequiel Sosa",
+          "fotoUrl": "./assets/faces/r_sosa.png",
+          "numero": 10,
+          "edad": 23,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 87,
+            "remate": 83,
+            "pase": 74,
+            "defensa": 46,
+            "fisico": 79,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 46000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 19000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 5500
+          },
+          "moral": 88,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_lux",
+          "nombre": "Gastón Lux",
+          "fotoUrl": "./assets/faces/r_lux.png",
+          "numero": 25,
+          "edad": 21,
+          "nacionalidad": "Argentina",
+          "posicion": "POR",
+          "atributos": {
+            "velocidad": 66,
+            "remate": 18,
+            "pase": 58,
+            "defensa": 84,
+            "fisico": 79,
+            "portero": 88
+          },
+          "contrato": {
+            "sueldoMensual": 20000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 3500000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 0
+          },
+          "moral": 76,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_casco",
+          "nombre": "Milton Casco",
+          "fotoUrl": "./assets/faces/r_casco.png",
+          "numero": 15,
+          "edad": 29,
+          "nacionalidad": "Argentina",
+          "posicion": "DEF",
+          "atributos": {
+            "velocidad": 78,
+            "remate": 40,
+            "pase": 68,
+            "defensa": 82,
+            "fisico": 82,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 36000,
+            "anoVencimiento": 2025,
+            "clausulaRescision": 9000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 81,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_carrascal",
+          "nombre": "Santiago Carrascal",
+          "fotoUrl": "./assets/faces/r_carrascal.png",
+          "numero": 14,
+          "edad": 20,
+          "nacionalidad": "Argentina",
+          "posicion": "MED",
+          "atributos": {
+            "velocidad": 79,
+            "remate": 69,
+            "pase": 75,
+            "defensa": 63,
+            "fisico": 76,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 22000,
+            "anoVencimiento": 2028,
+            "clausulaRescision": 8000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 1000
+          },
+          "moral": 83,
+          "energia": 100,
+          "lesionado": false
+        },
+        {
+          "id": "r_simone",
+          "nombre": "Ignacio Simone",
+          "fotoUrl": "./assets/faces/r_simone.png",
+          "numero": 20,
+          "edad": 24,
+          "nacionalidad": "Argentina",
+          "posicion": "DEL",
+          "atributos": {
+            "velocidad": 85,
+            "remate": 79,
+            "pase": 69,
+            "defensa": 41,
+            "fisico": 77,
+            "portero": 0
+          },
+          "contrato": {
+            "sueldoMensual": 32000,
+            "anoVencimiento": 2027,
+            "clausulaRescision": 12000000,
+            "fechaFirma": 2023,
+            "bonificacionesAdicionales": 2000
+          },
+          "moral": 85,
+          "energia": 100,
+          "lesionado": false
+        }
+      ]
+    }
+  ]
+}
