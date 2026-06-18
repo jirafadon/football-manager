@@ -506,7 +506,12 @@
         }
 
     </style>
-</head>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#133a1f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    </head>
 <body>
     <div class="container">
         <!-- HEADER -->
@@ -1105,10 +1110,28 @@
         }
     </script>
 
+
     <!-- MÓDULOS DEL JUEGO -->
     <script src="./js/engine/Audio.js"></script>
+    <script src="./js/engine/Tactica.js"></script>
     <script src="./js/models/Noticias.js"></script>
     <script src="./js/controllers/integracion.js"></script>
+    <script src="./js/controllers/tactica-integracion.js"></script>
+    
+    <!-- SERVICE WORKER REGISTRATION -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('✓ Service Worker registrado:', registration);
+                    })
+                    .catch((error) => {
+                        console.warn('⚠ Error registrando Service Worker:', error);
+                    });
+            });
+        }
+    </script>
     
 </body>
 </html>

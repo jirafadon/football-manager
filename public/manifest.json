@@ -1,0 +1,78 @@
+{
+  "name": "Football Manager - Juego de Gestión de Fútbol",
+  "short_name": "Football Manager",
+  "description": "Gestiona tu equipo de fútbol, compite en una liga completa y vive la experiencia del fútbol profesional",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0e1b12",
+  "theme_color": "#133a1f",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "./assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/images/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./assets/images/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["games", "sports"],
+  "screenshots": [
+    {
+      "src": "./assets/images/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "./assets/images/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Iniciar Partido",
+      "short_name": "Partido",
+      "description": "Inicia un partido rápidamente",
+      "url": "./?tab=partido",
+      "icons": [
+        {
+          "src": "./assets/images/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Ver Liga",
+      "short_name": "Liga",
+      "description": "Consulta la tabla de posiciones",
+      "url": "./?tab=liga",
+      "icons": [
+        {
+          "src": "./assets/images/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
