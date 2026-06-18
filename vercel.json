@@ -1,4 +1,5 @@
 {
+  "buildCommand": "echo 'Static deployment - no build needed'",
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
