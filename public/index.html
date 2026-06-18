@@ -382,20 +382,31 @@
             inicializarJuego();
         });
 
-        function inicializarJuego() {
+        async function inicializarJuego() {
             log('🎮 Inicializando Football Manager...', 'info');
             
-            // Generar liga
-            liga = generarLiga();
-            equipoUsuario = liga.equipos[0];
-            
-            log(`✓ Liga creada: ${liga.nombre}`, 'success');
-            log(`✓ Equipo: ${equipoUsuario.nombre}`, 'success');
-            
-            actualizarHeader();
-            renderPlantilla();
-            renderMercado();
-            renderLiga();
+            try {
+                // Cargar datos desde JSON
+                const response = await fetch('./data/equipos.json');
+                if (!response.ok) throw new Error('Error cargando equipos.json');
+                const data = await response.json();
+                
+                // Construir liga desde JSON
+                liga = construirLigaDesdeJSON(data);
+                equipoUsuario = liga.equipos[0];
+                
+                log(`✓ Liga creada: ${liga.nombre}`, 'success');
+                log(`✓ Equipo: ${equipoUsuario.nombre}`, 'success');
+                log(`✓ ${liga.equipos.length} equipos cargados`, 'success');
+                
+                actualizarHeader();
+                renderPlantilla();
+                renderMercado();
+                renderLiga();
+            } catch (error) {
+                log(`❌ Error inicializando: ${error.message}`, 'error');
+                console.error(error);
+            }
         }
 
         // ============ CAMBIAR PESTAÑA ============
@@ -566,19 +577,35 @@
             const canvas = document.getElementById('cancha');
             const ctx = canvas.getContext('2d');
             
-            // Limpiar
-            ctx.fillStyle = '#2e7d32';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // CESPED REALISTA: Franjas intercaladas
+            const stripeHeight = 30;
+            for (let y = 0; y < canvas.height; y += stripeHeight) {
+                ctx.fillStyle = (y / stripeHeight) % 2 === 0 ? '#2e7d32' : '#276b2b';
+                ctx.fillRect(0, y, canvas.width, stripeHeight);
+            }
             
-            // Líneas
+            // LINEAS DEL CAMPO
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 2;
+            
+            // Linea central
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, 0);
             ctx.lineTo(canvas.width / 2, canvas.height);
             ctx.stroke();
             
-            // Círculo central
+            // Lineas de banda
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(canvas.width, 0);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.stroke();
+            
+            // Circulo central
             ctx.beginPath();
             ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI * 2);
             ctx.stroke();
@@ -588,6 +615,147 @@
             ctx.beginPath();
             ctx.arc(canvas.width / 2, canvas.height / 2, 3, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Areas de penalti
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(0, canvas.height / 2 - 60, 120, 120);
+            ctx.strokeRect(0, canvas.height / 2 - 40, 50, 80);
+            ctx.strokeRect(canvas.width - 120, canvas.height / 2 - 60, 120, 120);
+            ctx.strokeRect(canvas.width - 50, canvas.height / 2 - 40, 50, 80);
+            
+            // PELOTA CON TRAIL
+            if (!estadoPartido.pelotaTrail) estadoPartido.pelotaTrail = [];
+            
+            const pelotaX = canvas.width / 2 + (Math.sin(estadoPartido.tick * 0.01) * 50);
+            const pelotaY = canvas.height / 2 + (Math.cos(estadoPartido.tick * 0.01) * 30);
+            
+            estadoPartido.pelotaTrail.push({ x: pelotaX, y: pelotaY });
+            if (estadoPartido.pelotaTrail.length > 3) estadoPartido.pelotaTrail.shift();
+            
+            // Trail con opacidad descendente
+            estadoPartido.pelotaTrail.forEach((pos, idx) => {
+                const opacity = 0.5 * (idx / estadoPartido.pelotaTrail.length);
+                ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Pelota principal
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(pelotaX, pelotaY, 6, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // MARCADOR DIGITAL
+            const marcadorX = canvas.width / 2 - 50;
+            const marcadorY = 10;
+            const marcadorWidth = 100;
+            const marcadorHeight = 40;
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(marcadorX, marcadorY, marcadorWidth, marcadorHeight);
+            
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(marcadorX, marcadorY, marcadorWidth, marcadorHeight);
+            
+            ctx.fillStyle = '#00ff00';
+            ctx.font = 'bold 12px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(`${estadoPartido.minuto || 0}'`, marcadorX + marcadorWidth / 2, marcadorY + 15);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 18px monospace';
+            ctx.fillText(`${estadoPartido.golesLocal || 0} - ${estadoPartido.golesVisitante || 0}`, marcadorX + marcadorWidth / 2, marcadorY + 35);
+            
+            estadoPartido.tick = (estadoPartido.tick || 0) + 1;
+        }
+
+        // ============ CONSTRUIR LIGA DESDE JSON ============
+        function construirLigaDesdeJSON(data) {
+            const equipos = data.equipos.map(eqData => ({
+                id: eqData.id,
+                nombre: eqData.nombre,
+                ciudad: eqData.ciudad,
+                presupuesto: eqData.presupuesto,
+                formacion: eqData.formacion,
+                estadio: { nombre: eqData.estadio, capacidad: 50000 },
+                fundacion: eqData.fundacion,
+                plantel: eqData.jugadores.map(jData => ({
+                    id: jData.id,
+                    nombre: jData.nombre,
+                    posicion: jData.posicion,
+                    numero: jData.numero,
+                    edad: jData.edad,
+                    sueldo: jData.sueldo,
+                    moral: jData.moral,
+                    energia: jData.energia,
+                    valor: jData.valor,
+                    atributos: {
+                        velocidad: jData.velocidad,
+                        remate: jData.remate,
+                        pase: jData.pase,
+                        defensa: jData.defensa,
+                        fisico: jData.fisico
+                    },
+                    calcularPromedio() {
+                        const { velocidad, remate, pase, defensa, fisico } = this.atributos;
+                        return (velocidad + remate + pase + defensa + fisico) / 5;
+                    }
+                })),
+                alineacionTitular: [],
+                puntos: 0,
+                PJ: 0,
+                PG: 0,
+                PE: 0,
+                PP: 0,
+                GF: 0,
+                GC: 0,
+                
+                calcularGastosSueldos() {
+                    return this.plantel.reduce((sum, j) => sum + (j.sueldo || 0), 0);
+                },
+                
+                ratingEquipo() {
+                    if (this.alineacionTitular.length === 0) return 70;
+                    const suma = this.alineacionTitular.reduce((sum, j) => sum + j.calcularPromedio(), 0);
+                    return suma / this.alineacionTitular.length;
+                },
+                
+                procesarBalanceFecha(precioEntrada) {
+                    const ingresos = this.estadio.capacidad * precioEntrada * (0.7 + Math.random() * 0.3);
+                    const gastos = this.calcularGastosSueldos();
+                    this.presupuesto += ingresos - gastos;
+                }
+            }));
+            
+            // Asignar titulares (primeros 11 del primer equipo)
+            equipos[0].alineacionTitular = equipos[0].plantel.slice(0, 11);
+            
+            return {
+                nombre: 'Temporada 2026',
+                fechaActual: 1,
+                equipos,
+                fixture: [],
+                
+                obtenerTablaOrdenada() {
+                    return this.equipos.sort((a, b) => (b.puntos || 0) - (a.puntos || 0));
+                },
+                
+                obtenerProximoPartido(idEquipo) {
+                    return { local: { nombre: 'Local' }, visitante: { nombre: 'Visitante' }, fecha: 1 };
+                },
+                
+                simularFechaActual(idEquipo) {
+                    this.equipos.forEach(e => {
+                        if (e.id !== idEquipo) {
+                            e.puntos += Math.floor(Math.random() * 3);
+                        }
+                    });
+                }
+            };
         }
 
         // ============ GENERADOR DE LIGA ============
