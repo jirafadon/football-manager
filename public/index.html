@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Manager - Juego de Gestión de Fútbol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #0066cc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        nav button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #f0f0f0;
+            color: #333;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        nav button:hover {
+            background: #e0e0e0;
+        }
+
+        nav button.active {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-height: 600px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .tabla-liga {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .tabla-liga thead {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+        }
+
+        .tabla-liga th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tabla-liga td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabla-liga tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .tabla-liga tbody tr.usuario {
+            background: rgba(0, 102, 204, 0.1);
+            border-left: 4px solid #0066cc;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+
+        .card-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-item:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #00aa44 0%, #008833 100%);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 170, 68, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #2e7d32;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .log {
+            background: #1c1c1c;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .log-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .log-item.success {
+            color: #00ff00;
+        }
+
+        .log-item.error {
+            color: #ff6666;
+        }
+
+        .log-item.warning {
+            color: #ffaa00;
+        }
+
+        .log-item.info {
+            color: #66aaff;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            nav button {
+                flex: 1 1 calc(50% - 5px);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>⚽ Football Manager</h1>
+            <div class="header-info">
+                <div class="info-item">
+                    <div class="info-label">Fecha</div>
+                    <div class="info-value" id="fecha-actual">1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Presupuesto</div>
+                    <div class="info-value" id="presupuesto-actual">100M</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Posición</div>
+                    <div class="info-value" id="posicion-actual">-</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVEGACIÓN -->
+        <nav>
+            <button class="nav-btn active" onclick="cambiarPestana('plantilla')">👥 Plantilla</button>
+            <button class="nav-btn" onclick="cambiarPestana('mercado')">💰 Mercado</button>
+            <button class="nav-btn" onclick="cambiarPestana('liga')">🏆 Liga</button>
+            <button class="nav-btn" onclick="cambiarPestana('partido')">⚽ Partido</button>
+        </nav>
+
+        <!-- CONTENIDO -->
+        <div class="content">
+            <!-- SECCIÓN: PLANTILLA -->
+            <div id="plantilla" class="section active">
+                <h2>Plantilla del Equipo</h2>
+                <div id="plantilla-contenido" class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando plantilla...</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: MERCADO -->
+            <div id="mercado" class="section">
+                <h2>Mercado de Pases</h2>
+                <div id="mercado-contenido" class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando mercado...</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: LIGA -->
+            <div id="liga" class="section">
+                <h2>Tabla de Posiciones</h2>
+                <button class="btn" onclick="avanzarFecha()">⚽ Jugar Siguiente Fecha</button>
+                <div id="liga-contenido" class="loading">
+                    <div class="spinner"></div>
+                    <p>Cargando tabla...</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: PARTIDO -->
+            <div id="partido" class="section">
+                <h2>Partido en Vivo</h2>
+                <div style="text-align: center;">
+                    <div class="info-item">
+                        <div class="info-label">Minuto</div>
+                        <div class="info-value" id="minuto-partido">0:00</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Marcador</div>
+                        <div class="info-value" id="marcador-partido">0 - 0</div>
+                    </div>
+                </div>
+                <canvas id="cancha" width="800" height="480"></canvas>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="iniciarPartido()">▶ Iniciar Partido</button>
+                    <button class="btn" onclick="pausarPartido()" style="background: linear-gradient(135deg, #ff9800 0%, #e68900 100%);">⏸ Pausar</button>
+                </div>
+            </div>
+
+            <!-- LOG -->
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============ ESTADO GLOBAL ============
+        let liga = null;
+        let equipoUsuario = null;
+        let estadoPartido = null;
+        let partidoEnCurso = false;
+
+        // ============ INICIALIZAR ============
+        window.addEventListener('DOMContentLoaded', () => {
+            inicializarJuego();
+        });
+
+        function inicializarJuego() {
+            log('🎮 Inicializando Football Manager...', 'info');
+            
+            // Generar liga
+            liga = generarLiga();
+            equipoUsuario = liga.equipos[0];
+            
+            log(`✓ Liga creada: ${liga.nombre}`, 'success');
+            log(`✓ Equipo: ${equipoUsuario.nombre}`, 'success');
+            
+            actualizarHeader();
+            renderPlantilla();
+            renderMercado();
+            renderLiga();
+        }
+
+        // ============ CAMBIAR PESTAÑA ============
+        function cambiarPestana(nombre) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            // Mostrar sección seleccionada
+            document.getElementById(nombre).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Actualizar contenido
+            if (nombre === 'plantilla') renderPlantilla();
+            if (nombre === 'mercado') renderMercado();
+            if (nombre === 'liga') renderLiga();
+        }
+
+        // ============ ACTUALIZAR HEADER ============
+        function actualizarHeader() {
+            document.getElementById('fecha-actual').textContent = liga.fechaActual;
+            document.getElementById('presupuesto-actual').textContent = equipoUsuario.presupuesto.toFixed(1) + 'M';
+            
+            const tabla = liga.obtenerTablaOrdenada();
+            const posicion = tabla.findIndex(e => e.id === equipoUsuario.id) + 1;
+            document.getElementById('posicion-actual').textContent = `${posicion}°`;
+        }
+
+        // ============ RENDERIZAR PLANTILLA ============
+        function renderPlantilla() {
+            const html = `
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>👥 Titulares (${equipoUsuario.alineacionTitular.length}/11)</h3>
+                        ${equipoUsuario.alineacionTitular.map(j => `
+                            <div class="card-item">
+                                <span>${j.nombre} (${j.posicion})</span>
+                                <span>${j.calcularPromedio().toFixed(1)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="card">
+                        <h3>🔄 Suplentes (${equipoUsuario.plantel.length - equipoUsuario.alineacionTitular.length})</h3>
+                        ${equipoUsuario.plantel.filter(j => !equipoUsuario.alineacionTitular.includes(j)).map(j => `
+                            <div class="card-item">
+                                <span>${j.nombre} (${j.posicion})</span>
+                                <span>${j.calcularPromedio().toFixed(1)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <h3>💰 Finanzas</h3>
+                    <div class="card-item">
+                        <span>Presupuesto</span>
+                        <span>${equipoUsuario.presupuesto.toFixed(1)}M</span>
+                    </div>
+                    <div class="card-item">
+                        <span>Gastos de Sueldos</span>
+                        <span>${equipoUsuario.calcularGastosSueldos().toFixed(1)}M</span>
+                    </div>
+                    <div class="card-item">
+                        <span>Rating del Equipo</span>
+                        <span>${equipoUsuario.ratingEquipo().toFixed(1)}</span>
+                    </div>
+                </div>
+            `;
+            document.getElementById('plantilla-contenido').innerHTML = html;
+        }
+
+        // ============ RENDERIZAR MERCADO ============
+        function renderMercado() {
+            const html = `
+                <div class="card">
+                    <h3>🎯 Próximos Partidos</h3>
+                    ${(() => {
+                        const proximoPartido = liga.obtenerProximoPartido(equipoUsuario.id);
+                        if (!proximoPartido) return '<p>No hay partidos pendientes</p>';
+                        return `
+                            <div class="card-item">
+                                <span>${proximoPartido.local.nombre} vs ${proximoPartido.visitante.nombre}</span>
+                                <span>Fecha ${proximoPartido.fecha}</span>
+                            </div>
+                        `;
+                    })()}
+                </div>
+            `;
+            document.getElementById('mercado-contenido').innerHTML = html;
+        }
+
+        // ============ RENDERIZAR LIGA ============
+        function renderLiga() {
+            const tabla = liga.obtenerTablaOrdenada();
+            const html = `
+                <table class="tabla-liga">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th>Equipo</th>
+                            <th>Pts</th>
+                            <th>PJ</th>
+                            <th>PG</th>
+                            <th>PE</th>
+                            <th>PP</th>
+                            <th>GF</th>
+                            <th>GC</th>
+                            <th>DIF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${tabla.map((e, idx) => `
+                            <tr ${e.id === equipoUsuario.id ? 'class="usuario"' : ''}>
+                                <td>${idx + 1}</td>
+                                <td>${e.nombre}</td>
+                                <td><strong>${e.puntos || 0}</strong></td>
+                                <td>${e.PJ || 0}</td>
+                                <td>${e.PG || 0}</td>
+                                <td>${e.PE || 0}</td>
+                                <td>${e.PP || 0}</td>
+                                <td>${e.GF || 0}</td>
+                                <td>${e.GC || 0}</td>
+                                <td>${(e.GF || 0) - (e.GC || 0)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            document.getElementById('liga-contenido').innerHTML = html;
+        }
+
+        // ============ AVANZAR FECHA ============
+        function avanzarFecha() {
+            if (liga.fechaActual > 38) {
+                log('❌ Temporada finalizada', 'error');
+                return;
+            }
+            
+            liga.simularFechaActual(equipoUsuario.id);
+            liga.fechaActual++;
+            equipoUsuario.procesarBalanceFecha(50);
+            
+            actualizarHeader();
+            renderLiga();
+            log(`✓ Fecha ${liga.fechaActual - 1} completada`, 'success');
+        }
+
+        // ============ PARTIDO ============
+        function iniciarPartido() {
+            const proximoPartido = liga.obtenerProximoPartido(equipoUsuario.id);
+            if (!proximoPartido) {
+                log('❌ No hay partido pendiente', 'error');
+                return;
+            }
+            
+            estadoPartido = crearEstadoPartido(equipoUsuario, { nombre: proximoPartido.visitante.nombre });
+            partidoEnCurso = true;
+            log(`⚽ Partido iniciado: ${equipoUsuario.nombre} vs ${proximoPartido.visitante.nombre}`, 'info');
+            renderizarCancha();
+        }
+
+        function pausarPartido() {
+            partidoEnCurso = false;
+            log('⏸ Partido pausado', 'warning');
+        }
+
+        // ============ RENDERIZAR CANCHA ============
+        function renderizarCancha() {
+            const canvas = document.getElementById('cancha');
+            const ctx = canvas.getContext('2d');
+            
+            // Limpiar
+            ctx.fillStyle = '#2e7d32';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Líneas
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            
+            // Círculo central
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Punto central
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // ============ GENERADOR DE LIGA ============
+        function generarLiga() {
+            const equipos = [];
+            const nombres = ['Athletic', 'Real Madrid', 'Barcelona', 'Atlético', 'Valencia', 'Sevilla', 'Real Sociedad', 'Villarreal', 'Betis', 'Getafe', 'Celta', 'Osasuna', 'Mallorca', 'Almería', 'Las Palmas', 'Rayo', 'Girona', 'Leganés', 'Elche', 'Sporting'];
+            
+            for (let i = 0; i < 20; i++) {
+                equipos.push({
+                    id: `eq_${i}`,
+                    nombre: nombres[i],
+                    presupuesto: Math.random() * 100 + 50,
+                    estadio: { nombre: `Estadio ${i}`, capacidad: 50000 },
+                    reputacion: Math.random() * 100,
+                    plantel: generarPlantel(i),
+                    alineacionTitular: [],
+                    puntos: 0,
+                    
+                    calcularGastosSueldos() {
+                        return this.plantel.reduce((sum, j) => sum + (j.sueldo || 0), 0);
+                    },
+                    
+                    ratingEquipo() {
+                        if (this.alineacionTitular.length === 0) return 70;
+                        const suma = this.alineacionTitular.reduce((sum, j) => sum + j.calcularPromedio(), 0);
+                        return suma / this.alineacionTitular.length;
+                    },
+                    
+                    procesarBalanceFecha(precioEntrada) {
+                        const ingresos = this.estadio.capacidad * precioEntrada * (0.7 + Math.random() * 0.3);
+                        const gastos = this.calcularGastosSueldos();
+                        this.presupuesto += ingresos - gastos;
+                    }
+                });
+            }
+            
+            equipos[0].alineacionTitular = equipos[0].plantel.slice(0, 11);
+            
+            return {
+                nombre: 'Temporada 2026',
+                fechaActual: 1,
+                equipos,
+                fixture: [],
+                
+                obtenerTablaOrdenada() {
+                    return this.equipos.sort((a, b) => (b.puntos || 0) - (a.puntos || 0));
+                },
+                
+                obtenerProximoPartido(idEquipo) {
+                    return { local: { nombre: 'Local' }, visitante: { nombre: 'Visitante' }, fecha: 1 };
+                },
+                
+                simularFechaActual(idEquipo) {
+                    this.equipos.forEach(e => {
+                        if (e.id !== idEquipo) {
+                            e.puntos += Math.floor(Math.random() * 3);
+                        }
+                    });
+                }
+            };
+        }
+
+        function generarPlantel(idEquipo) {
+            const posiciones = ['POR', 'DEF', 'DEF', 'DEF', 'DEF', 'MED', 'MED', 'MED', 'MED', 'DEL', 'DEL', 'DEF', 'MED', 'DEL', 'POR', 'DEF', 'MED', 'DEL', 'MED', 'DEL'];
+            const nombres = ['García', 'Rodríguez', 'Martínez', 'López', 'González', 'Pérez', 'Sánchez', 'Ramírez', 'Torres', 'Flores', 'Rivera', 'Cruz', 'Morales', 'Gutiérrez', 'Ortiz', 'Jiménez', 'Reyes', 'Vargas', 'Castillo', 'Medina'];
+            
+            return posiciones.map((pos, i) => ({
+                id: `${idEquipo}_${i}`,
+                nombre: `${nombres[i % nombres.length]} ${i}`,
+                posicion: pos,
+                edad: Math.floor(Math.random() * 15) + 20,
+                sueldo: Math.random() * 8 + 1,
+                atributos: {
+                    velocidad: Math.random() * 30 + 60,
+                    remate: Math.random() * 30 + 60,
+                    pase: Math.random() * 30 + 60,
+                    defensa: Math.random() * 30 + 60,
+                    fisico: Math.random() * 30 + 60
+                },
+                
+                calcularPromedio() {
+                    const { velocidad, remate, pase, defensa, fisico } = this.atributos;
+                    return (velocidad + remate + pase + defensa + fisico) / 5;
+                }
+            }));
+        }
+
+        function crearEstadoPartido(local, visitante) {
+            return {
+                local,
+                visitante,
+                tick: 0,
+                golesLocal: 0,
+                golesVisitante: 0,
+                eventos: []
+            };
+        }
+
+        // ============ LOG ============
+        function log(mensaje, tipo = 'info') {
+            const logEl = document.getElementById('log');
+            const item = document.createElement('div');
+            item.className = `log-item ${tipo}`;
+            item.textContent = `[${new Date().toLocaleTimeString()}] ${mensaje}`;
+            logEl.appendChild(item);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -1,10 +1,7 @@
 {
-  "buildCommand": "pnpm build",
-  "outputDirectory": "dist",
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "framework": "expo",
+  "buildCommand": "echo 'Build complete'",
+  "outputDirectory": "public",
+  "public": true,
   "rewrites": [
     {
       "source": "/(.*)",
