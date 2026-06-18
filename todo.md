@@ -49,3 +49,15 @@
 - [ ] Pruebas de StorageService
 - [ ] Pruebas de validación de titulares
 - [ ] Pruebas end-to-end de flujos principales
+
+## Motor de la Liga (Fase 2)
+- [x] Generador de Fixture (Round Robin para 38 fechas)
+- [x] Tabla de Posiciones dinámica
+- [x] Simulador de Partidos de Fondo
+- [x] Clase Partido con resultado y estadísticas
+- [x] Servicio de Liga para gestión completa
+- [x] Utilidades para generar datos de prueba de ligas
+- [ ] Pantalla de Calendario/Fixtures
+- [ ] Pantalla de Tabla de Posiciones
+- [ ] Pantalla de Resultados de Partidos
+- [ ] Integración de simulador con contexto global
