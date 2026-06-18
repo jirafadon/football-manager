@@ -1,0 +1,198 @@
+<!-- FRAGMENTO A AGREGAR AL index.html - DESPUÉS DEL MERCADO RIVAL -->
+
+<!-- PANEL: MERCADO DE AGENTES LIBRES -->
+<section id="panel-mercado-libres" class="panel-mercado">
+  <h2>Agentes Libres</h2>
+  <div class="mercado-controles">
+    <button id="btn-refrescar-libres" class="btn btn-secondary">Refrescar Pool</button>
+    <span id="contador-libres" class="contador-info">0 disponibles</span>
+  </div>
+  <div id="mercado-libres" class="mercado-grid">
+    <!-- Se llena dinámicamente con renderLibres() -->
+  </div>
+</section>
+
+<!-- ESTILOS CSS PARA MERCADO DE LIBRES -->
+<style>
+  .panel-mercado {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .mercado-controles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+
+  .contador-info {
+    font-size: 13px;
+    color: #666;
+    font-weight: bold;
+  }
+
+  .mercado-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+  }
+
+  .card-libre {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 12px;
+    transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .card-libre:hover {
+    border-color: #0066cc;
+    box-shadow: 0 2px 8px rgba(0,102,204,0.12);
+  }
+
+  .card-libre-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 8px;
+  }
+
+  .card-libre-nombre {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .card-libre-posicion {
+    background: #0066cc;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .card-libre-info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+
+  .card-libre-stats {
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+  }
+
+  .stat-label {
+    color: #999;
+  }
+
+  .stat-value {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .card-libre-acciones {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .btn-fichar-libre {
+    flex: 1;
+    padding: 8px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: all 0.2s;
+  }
+
+  .btn-fichar-libre:hover {
+    background: #218838;
+  }
+
+  .btn-fichar-libre:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  .input-sueldo-libre {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .input-sueldo-libre:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0,102,204,0.1);
+  }
+
+  .btn-confirmar-sueldo {
+    padding: 6px 10px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .btn-confirmar-sueldo:hover {
+    background: #0052a3;
+  }
+
+  .btn-cancelar-sueldo {
+    padding: 6px 10px;
+    background: #999;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .btn-cancelar-sueldo:hover {
+    background: #777;
+  }
+
+  .mercado-vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 30px;
+    color: #999;
+  }
+
+  @media (max-width: 768px) {
+    .mercado-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mercado-controles {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

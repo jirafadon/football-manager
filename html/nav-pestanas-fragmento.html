@@ -1,0 +1,50 @@
+<!-- FRAGMENTO A AGREGAR EN index.html DESPUÉS DEL <header> -->
+
+<!-- NAVEGACIÓN POR PESTAÑAS -->
+<nav id="menu-principal" class="nav-pestanas">
+  <button id="btn-plantilla" class="btn-pestaña activa" onclick="cambiarPantalla('pantalla-plantilla')">
+    👥 Plantilla
+  </button>
+  <button id="btn-mercado" class="btn-pestaña" onclick="cambiarPantalla('pantalla-mercado')">
+    💰 Mercado
+  </button>
+  <button id="btn-liga" class="btn-pestaña" onclick="cambiarPantalla('pantalla-liga')">
+    🏆 Liga
+  </button>
+  <button id="btn-partido" class="btn-pestaña" onclick="cambiarPantalla('pantalla-partido')">
+    ⚽ Partido
+  </button>
+</nav>
+
+<!-- PANTALLA: PLANTILLA -->
+<section id="pantalla-plantilla" class="pantalla-activa">
+  <div class="pantalla-contenido">
+    <!-- Contenido de plantilla se renderiza aquí -->
+  </div>
+</section>
+
+<!-- PANTALLA: MERCADO -->
+<section id="pantalla-mercado" class="oculta">
+  <div class="pantalla-contenido">
+    <!-- Contenido de mercado se renderiza aquí -->
+  </div>
+</section>
+
+<!-- PANTALLA: LIGA -->
+<section id="pantalla-liga" class="oculta">
+  <div class="pantalla-contenido">
+    <!-- Contenido de liga se renderiza aquí -->
+  </div>
+</section>
+
+<!-- PANTALLA: PARTIDO -->
+<section id="pantalla-partido" class="oculta">
+  <div class="pantalla-contenido">
+    <!-- Contenido de partido se renderiza aquí -->
+  </div>
+</section>
+
+<!-- CONSOLA CENTRAL -->
+<div id="log" class="log-container">
+  <!-- Mensajes se inyectan aquí -->
+</div>

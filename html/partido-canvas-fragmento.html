@@ -1,0 +1,281 @@
+<!-- FRAGMENTO A AGREGAR AL index.html - REEMPLAZAR SECCIÓN DE PARTIDO RÁPIDO -->
+
+<!-- SECCIÓN: PARTIDO INTERACTIVO 2D -->
+<section id="partido-interactivo" class="partido-section">
+  <h2>Partido en Vivo</h2>
+  
+  <!-- CONTROLES DEL PARTIDO -->
+  <div class="partido-controles">
+    <div class="controles-izquierda">
+      <button id="btn-iniciar-partido" class="btn btn-primary">Iniciar Partido</button>
+      <button id="btn-pausar-partido" class="btn btn-warning" disabled>Pausar</button>
+      <button id="btn-reanudar-partido" class="btn btn-success" disabled>Reanudar</button>
+    </div>
+    
+    <div class="controles-centro">
+      <span id="minuto-partido" class="minuto-display">0:00</span>
+      <span id="marcador-partido" class="marcador-display">0 - 0</span>
+    </div>
+    
+    <div class="controles-derecha">
+      <label>Velocidad:</label>
+      <button id="btn-velocidad-1x" class="btn btn-secondary active">1x</button>
+      <button id="btn-velocidad-2x" class="btn btn-secondary">2x</button>
+    </div>
+  </div>
+  
+  <!-- LIENZO DE JUEGO -->
+  <div class="canvas-container">
+    <canvas id="campo-juego" width="1000" height="600"></canvas>
+  </div>
+  
+  <!-- INFORMACIÓN DEL PARTIDO -->
+  <div class="partido-info">
+    <div class="info-card">
+      <h4>Local: <span id="equipo-local-nombre">-</span></h4>
+      <p>Goles: <span id="goles-local">0</span></p>
+      <p>Posesión: <span id="posesion-local">0</span>%</p>
+      <p>Tiros: <span id="tiros-local">0</span></p>
+    </div>
+    
+    <div class="info-card">
+      <h4>Visitante: <span id="equipo-visitante-nombre">-</span></h4>
+      <p>Goles: <span id="goles-visitante">0</span></p>
+      <p>Posesión: <span id="posesion-visitante">0</span>%</p>
+      <p>Tiros: <span id="tiros-visitante">0</span></p>
+    </div>
+  </div>
+  
+  <!-- CONSOLA DE EVENTOS EN TIEMPO REAL -->
+  <div class="partido-eventos">
+    <h3>Eventos del Partido</h3>
+    <div id="log-eventos" class="log-eventos-container"></div>
+  </div>
+</section>
+
+<!-- ESTILOS CSS PARA PARTIDO INTERACTIVO -->
+<style>
+  .partido-section {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .partido-controles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .controles-izquierda,
+  .controles-derecha {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .controles-centro {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .minuto-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .marcador-display {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0066cc;
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+
+  .btn-primary {
+    background: #0066cc;
+    color: white;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #0052a3;
+  }
+
+  .btn-warning {
+    background: #ff9800;
+    color: white;
+  }
+
+  .btn-warning:hover:not(:disabled) {
+    background: #e68900;
+  }
+
+  .btn-success {
+    background: #28a745;
+    color: white;
+  }
+
+  .btn-success:hover:not(:disabled) {
+    background: #218838;
+  }
+
+  .btn-secondary {
+    background: #6c757d;
+    color: white;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: #5a6268;
+  }
+
+  .btn-secondary.active {
+    background: #0066cc;
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .canvas-container {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  #campo-juego {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #2d5016;
+  }
+
+  .partido-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .info-card h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .info-card p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .partido-eventos {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .partido-eventos h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .log-eventos-container {
+    height: 200px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  .evento-log {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-left: 4px solid #ddd;
+    background: white;
+    border-radius: 2px;
+    font-size: 13px;
+    color: #333;
+  }
+
+  .evento-log.gol {
+    border-left-color: #28a745;
+    background: #e8f5e9;
+    font-weight: bold;
+    color: #1b5e20;
+  }
+
+  .evento-log.tiro {
+    border-left-color: #ff9800;
+    background: #fff3e0;
+  }
+
+  .evento-log.intercepcion {
+    border-left-color: #f44336;
+    background: #ffebee;
+  }
+
+  .evento-minuto {
+    font-weight: bold;
+    color: #0066cc;
+    margin-right: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .partido-controles {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .controles-izquierda,
+    .controles-derecha,
+    .controles-centro {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .partido-info {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,343 @@
+<!-- FRAGMENTOS A AGREGAR AL index.html EXISTENTE -->
+
+<!-- NAVEGACIÓN CON PESTAÑAS -->
+<div class="tabs-container">
+  <button class="tab-btn active" data-tab="equipo">Equipo</button>
+  <button class="tab-btn" data-tab="alineacion">Alineación</button>
+  <button class="tab-btn" data-tab="finanzas">Finanzas</button>
+  <button class="tab-btn" data-tab="liga">Liga</button>
+</div>
+
+<!-- PESTAÑA: EQUIPO -->
+<section id="equipo-tab" class="tab-content active">
+  <h2>Mi Equipo</h2>
+  <div id="equipo-info" class="card">
+    <h3 id="equipo-nombre"></h3>
+    <p>Presupuesto: $<span id="equipo-presupuesto">0</span>M</p>
+    <p>Reputación: <span id="equipo-reputacion">0</span>/100</p>
+    <p>Rating Promedio: <span id="equipo-rating">0</span></p>
+  </div>
+  
+  <div id="plantel-info" class="card">
+    <h3>Plantel (<span id="plantel-count">0</span> jugadores)</h3>
+    <div id="plantel-list"></div>
+  </div>
+</section>
+
+<!-- PESTAÑA: ALINEACIÓN TÁCTICA -->
+<section id="alineacion-tab" class="tab-content">
+  <h2>Alineación Táctica</h2>
+  
+  <div class="alineacion-container">
+    <!-- TITULARES -->
+    <div class="alineacion-seccion">
+      <h3>Titulares (11)</h3>
+      <div id="titulares-list" class="jugadores-grid">
+        <!-- Se llena dinámicamente -->
+      </div>
+      <p id="validacion-alineacion" class="validacion-msg"></p>
+    </div>
+    
+    <!-- BANCO -->
+    <div class="alineacion-seccion">
+      <h3>Banco</h3>
+      <div id="banco-list" class="jugadores-grid">
+        <!-- Se llena dinámicamente -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- SELECTOR POR POSICIÓN -->
+  <div class="posiciones-selector">
+    <h3>Seleccionar por Posición</h3>
+    <div id="posiciones-tabs" class="posiciones-tabs">
+      <button class="pos-btn active" data-pos="ARQ">Arqueros</button>
+      <button class="pos-btn" data-pos="DEF">Defensas</button>
+      <button class="pos-btn" data-pos="MED">Mediocampistas</button>
+      <button class="pos-btn" data-pos="DEL">Delanteros</button>
+    </div>
+    <div id="posiciones-list" class="jugadores-grid"></div>
+  </div>
+</section>
+
+<!-- PESTAÑA: FINANZAS -->
+<section id="finanzas-tab" class="tab-content">
+  <h2>Finanzas del Club</h2>
+  
+  <div class="finanzas-container">
+    <div class="card finanzas-card">
+      <h3>Presupuesto Actual</h3>
+      <p class="big-number">$<span id="fin-presupuesto">0</span>M</p>
+    </div>
+    
+    <div class="card finanzas-card">
+      <h3>Gastos Mensuales (Sueldos)</h3>
+      <p class="big-number">$<span id="fin-gastos">0</span>M</p>
+    </div>
+    
+    <div class="card finanzas-card">
+      <h3>Ingresos por Entradas</h3>
+      <p class="big-number">$<span id="fin-ingresos">0</span>M</p>
+      <p class="small-text">Ocupación: <span id="fin-ocupacion">0</span>%</p>
+    </div>
+    
+    <div class="card finanzas-card">
+      <h3>Balance Fecha</h3>
+      <p class="big-number" id="fin-balance">+$0M</p>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h3>Procesamiento de Fecha</h3>
+    <button id="procesar-balance-btn" class="btn btn-primary">Procesar Balance de Fecha</button>
+    <div id="balance-resultado"></div>
+  </div>
+  
+  <div class="card">
+    <h3>Historial de Transacciones</h3>
+    <table id="transacciones-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Concepto</th>
+          <th>Monto</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody id="transacciones-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PESTAÑA: LIGA -->
+<section id="liga-tab" class="tab-content">
+  <h2>Tabla de Posiciones</h2>
+  
+  <div class="card">
+    <h3>Fecha Actual: <span id="liga-fecha">1</span>/38</h3>
+    <button id="simular-fecha-btn" class="btn btn-primary">Simular Fecha</button>
+  </div>
+  
+  <div class="card">
+    <h3>Próximo Partido</h3>
+    <div id="proximo-partido" class="partido-card">
+      <!-- Se llena dinámicamente -->
+    </div>
+  </div>
+  
+  <div class="card">
+    <h3>Tabla de Posiciones</h3>
+    <table id="tabla-posiciones" class="tabla-liga">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th>Equipo</th>
+          <th>PJ</th>
+          <th>PG</th>
+          <th>PE</th>
+          <th>PP</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
+  
+  <div class="card">
+    <h3>Zona de Champions (Top 4)</h3>
+    <div id="zona-champions" class="equipos-zona"></div>
+  </div>
+  
+  <div class="card">
+    <h3>Zona de Descenso (Últimos 3)</h3>
+    <div id="zona-descenso" class="equipos-zona"></div>
+  </div>
+  
+  <div class="card">
+    <h3>Partidos de la Fecha</h3>
+    <div id="partidos-fecha" class="partidos-list"></div>
+  </div>
+</section>
+
+<!-- ESTILOS CSS BÁSICOS -->
+<style>
+  .tabs-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+  }
+  
+  .tab-btn.active {
+    border-bottom-color: #0066cc;
+    color: #0066cc;
+    font-weight: bold;
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  .card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .jugadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .jugador-card {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  
+  .jugador-card:hover {
+    border-color: #0066cc;
+    box-shadow: 0 2px 8px rgba(0,102,204,0.2);
+  }
+  
+  .jugador-card.titular {
+    background: #e8f4f8;
+    border-color: #0066cc;
+    font-weight: bold;
+  }
+  
+  .jugador-card.banco {
+    opacity: 0.7;
+  }
+  
+  .posiciones-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .pos-btn {
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .pos-btn.active {
+    background: #0066cc;
+    color: white;
+    border-color: #0066cc;
+  }
+  
+  .finanzas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .finanzas-card {
+    text-align: center;
+  }
+  
+  .big-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0066cc;
+    margin: 10px 0;
+  }
+  
+  .small-text {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .tabla-liga {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  .tabla-liga th,
+  .tabla-liga td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-liga th {
+    background: #f0f0f0;
+    font-weight: bold;
+  }
+  
+  .tabla-liga tr:hover {
+    background: #f9f9f9;
+  }
+  
+  .partido-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 10px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    background: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  
+  .btn:hover {
+    background: #0052a3;
+  }
+  
+  .validacion-msg {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .validacion-msg.error {
+    background: #ffebee;
+    color: #c62828;
+  }
+  
+  .validacion-msg.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+</style>

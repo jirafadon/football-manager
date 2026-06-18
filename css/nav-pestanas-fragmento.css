@@ -1,0 +1,163 @@
+/* FRAGMENTO A AGREGAR EN css/style.css */
+
+/* ============ UTILIDADES ============ */
+.oculta {
+  display: none !important;
+}
+
+/* ============ NAVEGACIÓN POR PESTAÑAS ============ */
+.nav-pestanas {
+  display: flex;
+  gap: 0;
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  border-bottom: 3px solid #003d7a;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-pestaña {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-pestaña:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.btn-pestaña.activa {
+  background: rgba(255, 255, 255, 0.2);
+  border-bottom: 4px solid #ffeb3b;
+  box-shadow: inset 0 -4px 0 #ffeb3b;
+}
+
+.btn-pestaña.activa::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #ffeb3b;
+}
+
+/* ============ SECCIONES/PANTALLAS ============ */
+section {
+  display: block;
+  padding: 20px;
+  min-height: calc(100vh - 200px);
+  animation: fadeIn 0.3s ease-in;
+}
+
+section.oculta {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pantalla-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============ CONSOLA CENTRAL ============ */
+.log-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: #1a1a1a;
+  border-top: 2px solid #0066cc;
+  overflow-y: auto;
+  padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #00ff00;
+  z-index: 100;
+}
+
+.log-entry {
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  border-radius: 3px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.log-entry.log-info {
+  color: #00ff00;
+}
+
+.log-entry.log-success {
+  color: #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.log-entry.log-warning {
+  color: #ffff00;
+  background: rgba(255, 255, 0, 0.1);
+}
+
+.log-entry.log-error {
+  color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .nav-pestanas {
+    flex-wrap: wrap;
+  }
+
+  .btn-pestaña {
+    flex: 1 1 50%;
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  section {
+    padding: 15px;
+    min-height: calc(100vh - 250px);
+  }
+
+  .log-container {
+    height: 120px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-pestaña {
+    flex: 1 1 100%;
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+
+  .nav-pestanas {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}

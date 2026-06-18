@@ -1,0 +1,215 @@
+/* FRAGMENTO A INSERTAR EN css/style.css */
+
+/* ============ CONTENEDOR DE LIGA ============ */
+.liga-contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.liga-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.liga-header h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #0066cc;
+}
+
+.fecha-info {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+/* ============ CONTROLES DE LIGA ============ */
+.liga-controles {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.btn-avanzar-fecha {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #00aa44 0%, #008833 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 170, 68, 0.3);
+}
+
+.btn-avanzar-fecha:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 170, 68, 0.4);
+}
+
+.btn-avanzar-fecha:active {
+  transform: translateY(0);
+}
+
+.btn-avanzar-fecha:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ============ TABLA DE LIGA ============ */
+.tabla-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tabla-liga {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1c2e22;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.tabla-liga thead {
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabla-liga th {
+  padding: 16px 12px;
+  text-align: left;
+  border-bottom: 2px solid #0052a3;
+}
+
+.tabla-liga td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #2d4a35;
+}
+
+.tabla-liga tbody tr {
+  transition: all 0.2s ease;
+}
+
+.tabla-liga tbody tr:hover {
+  background: #253d2c;
+  cursor: pointer;
+}
+
+/* Resaltar al equipo del usuario */
+.tabla-liga tbody tr.fila-usuario {
+  background: rgba(0, 102, 204, 0.2);
+  border-left: 4px solid #0066cc;
+  font-weight: 600;
+}
+
+.tabla-liga tbody tr.fila-usuario:hover {
+  background: rgba(0, 102, 204, 0.3);
+}
+
+/* Resaltar posiciones especiales */
+.tabla-liga tbody tr:nth-child(1) {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.tabla-liga tbody tr:nth-child(1):hover {
+  background: rgba(255, 215, 0, 0.15);
+}
+
+/* Zona Champions (1-4) */
+.tabla-liga tbody tr:nth-child(-n+4) td:first-child {
+  background: rgba(0, 170, 68, 0.2);
+  font-weight: 600;
+  color: #00ff66;
+}
+
+/* Zona Descenso (últimas 3) */
+.tabla-liga tbody tr:nth-last-child(-n+3) td:first-child {
+  background: rgba(255, 0, 0, 0.2);
+  font-weight: 600;
+  color: #ff6666;
+}
+
+/* Columnas numéricas centradas */
+.tabla-liga td:nth-child(n+3) {
+  text-align: center;
+}
+
+.tabla-liga th:nth-child(n+3) {
+  text-align: center;
+}
+
+/* Columna de posición */
+.tabla-liga td:first-child {
+  font-weight: 600;
+  text-align: center;
+  width: 50px;
+}
+
+.tabla-liga th:first-child {
+  text-align: center;
+  width: 50px;
+}
+
+/* Columna de equipo */
+.tabla-liga td:nth-child(2) {
+  text-align: left;
+  min-width: 150px;
+}
+
+/* Puntos destacados */
+.tabla-liga td:nth-child(3) {
+  font-weight: 600;
+  font-size: 15px;
+  color: #ffeb3b;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .tabla-liga {
+    font-size: 12px;
+  }
+
+  .tabla-liga th,
+  .tabla-liga td {
+    padding: 10px 8px;
+  }
+
+  .btn-avanzar-fecha {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .tabla-wrapper {
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabla-liga {
+    font-size: 11px;
+  }
+
+  .tabla-liga th,
+  .tabla-liga td {
+    padding: 8px 6px;
+  }
+
+  .tabla-liga td:nth-child(n+5) {
+    display: none;
+  }
+
+  .tabla-liga th:nth-child(n+5) {
+    display: none;
+  }
+
+  .btn-avanzar-fecha {
+    width: 100%;
+  }
+}
